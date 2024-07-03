@@ -335,7 +335,7 @@ int GZBridge::task_spawn(int argc, char *argv[])
 
 			while ((instance->world_time_us() == 0) && sleep_count_limit > 0) {
 				// wait for first clock message
-				system_usleep(1000);
+				system_usleep(5000);
 				sleep_count_limit--;
 			}
 
