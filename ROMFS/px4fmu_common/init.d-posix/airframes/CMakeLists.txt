@@ -79,7 +79,8 @@ px4_add_romfs_files(
 	4006_gz_px4vision
 	4010_gz_x500_mono_cam
 	4012_gz_sh_136
-
+	4013_gz_gs001
+	
 	6011_gazebo-classic_typhoon_h480
 	6011_gazebo-classic_typhoon_h480.post
 
