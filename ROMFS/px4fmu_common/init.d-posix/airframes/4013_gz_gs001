@@ -64,7 +64,10 @@ param set-default COM_ARM_WO_GPS 1
 param set-default FD_FAIL_P 180
 param set-default FD_FAIL_R 180
 
-param set-default SENS_BOARD_Z_OFF -90
+
+param set-default SENS_BOARD_X_OFF -90
+param set-default SENS_BOARD_Z_OFF 180
+
 
 param set-default MC_PITCHRATE_P 0.075
 param set-default MC_PITCHRATE_I 0.1
