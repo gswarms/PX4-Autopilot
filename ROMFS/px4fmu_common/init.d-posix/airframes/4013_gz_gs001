@@ -69,17 +69,17 @@ param set-default SENS_BOARD_X_OFF -90
 param set-default SENS_BOARD_Z_OFF 180
 
 
-param set-default MC_PITCHRATE_P 0.075
-param set-default MC_PITCHRATE_I 0.1
-param set-default MC_PITCHRATE_D 0.003
-param set-default MC_PITCHRATE_K 0.65
+param set-default MC_PITCHRATE_P 0.05
+param set-default MC_PITCHRATE_I 0.025
+param set-default MC_PITCHRATE_D 0.0005
+param set-default MC_PITCHRATE_K 1.0
 
-param set-default MC_ROLLRATE_P 0.075
-param set-default MC_ROLLRATE_I 0.1
-param set-default MC_ROLLRATE_D 0.003
-param set-default MC_ROLLRATE_K 0.65
+param set-default MC_ROLLRATE_P 0.05
+param set-default MC_ROLLRATE_I 0.025
+param set-default MC_ROLLRATE_D 0.0005
+param set-default MC_ROLLRATE_K 1.0
 
-param set-default MC_YAWRATE_P 0.1
+param set-default MC_YAWRATE_P 0.35
 
-param set-default MC_ROLL_P 7.0
-param set-default MC_PITCH_P 7.0
+param set-default MC_ROLL_P 4.0
+param set-default MC_PITCH_P 4.0
