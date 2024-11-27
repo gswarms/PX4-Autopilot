@@ -51,6 +51,7 @@
 #include <uORB/topics/battery_status.h>
 #include <uORB/topics/vehicle_local_position.h>
 #include <uORB/topics/vehicle_status.h>
+#include <uORB/topics/osd_overlay.h>
 
 #define OSD_SPI_BUS_SPEED (2000000L) /*  2 MHz  */
 
@@ -97,6 +98,7 @@ private:
 	int add_battery_info(uint8_t pos_x, uint8_t pos_y);
 	int add_altitude(uint8_t pos_x, uint8_t pos_y);
 	int add_flighttime(float flight_time, uint8_t pos_x, uint8_t pos_y);
+	int add_target_direction(uint32_t x, uint32_t y, uint8_t c);
 
 	static const char *get_flight_mode(uint8_t nav_state);
 
@@ -109,6 +111,7 @@ private:
 	uORB::Subscription _battery_sub{ORB_ID(battery_status)};
 	uORB::Subscription _local_position_sub{ORB_ID(vehicle_local_position)};
 	uORB::Subscription _vehicle_status_sub{ORB_ID(vehicle_status)};
+	uORB::Subscription _osd_overlay_sub{ORB_ID(osd_overlay)};
 
 	// battery
 	float _battery_voltage_filtered_v{0.f};
@@ -125,6 +128,11 @@ private:
 
 	// flight mode
 	uint8_t _nav_state{0};
+
+	// osd overlay
+	uint32_t _pixel_x;
+	uint32_t _pixel_y;
+	uint8_t _overlay_char;
 
 	DEFINE_PARAMETERS(
 		(ParamInt<px4::params::OSD_ATXXXX_CFG>) _param_osd_atxxxx_cfg
