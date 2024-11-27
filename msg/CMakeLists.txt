@@ -221,6 +221,9 @@ set(msg_files
 	VtolVehicleStatus.msg
 	Wind.msg
 	YawEstimatorStatus.msg
+
+	# user messages
+	OsdOverlay.msg
 )
 list(SORT msg_files)
 

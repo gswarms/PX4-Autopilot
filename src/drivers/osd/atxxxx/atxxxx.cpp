@@ -297,6 +297,11 @@ OSDatxxxx::add_flighttime(float flight_time, uint8_t pos_x, uint8_t pos_y)
 	return ret;
 }
 
+int OSDatxxxx::add_target_direction(uint32_t x, uint32_t y, uint8_t c);
+{
+	return add_character_to_screen(c,x,y);
+}
+
 int
 OSDatxxxx::enable_screen()
 {
@@ -368,6 +373,17 @@ OSDatxxxx::update_topics()
 
 		_arming_state = vehicle_status.arming_state;
 		_nav_state = vehicle_status.nav_state;
+	}
+
+	/* update OSD overlay subscription */
+	if (_osd_overlay_sub.updated())
+	{
+		osd_overlay_s osd_overlay;
+		_osd_overlay_sub.copy(&osd_overlay);
+		
+		_pixel_x = osd_overlay.x;
+		_pixel_y = osd_overlay.y;
+		_pixel_c = osd_overlay.c;
 	}
 
 	return PX4_OK;
@@ -459,6 +475,8 @@ OSDatxxxx::update_screen()
 	}
 
 	add_string_to_screen_centered(flight_mode, 12, 10);
+
+	add_target_direction(_pixel_x, _pixel_y, _overlay_char);
 
 	return ret;
 }
