@@ -3065,9 +3065,6 @@ MavlinkReceiver::handle_message_gimbal_device_attitude_status(mavlink_message_t 
 void
 MavlinkReceiver::handle_message_local_position_ned_cov(mavlink_message_t *msg)
 {
-
-	PX4_INFO("received radar message");
-	
 	mavlink_local_position_ned_cov_t local_position_ned_cov;
 	mavlink_msg_local_position_ned_cov_decode(msg, &local_position_ned_cov);
 
