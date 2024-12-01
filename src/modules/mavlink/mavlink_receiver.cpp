@@ -3058,6 +3058,36 @@ MavlinkReceiver::handle_message_gimbal_device_attitude_status(mavlink_message_t 
 
 	_gimbal_device_attitude_status_pub.publish(gimbal_attitude_status);
 }
+void
+MavlinkReceiver::handle_message_local_position_ned_cov(mavlink_message_t *msg)
+{
+	mavlink_local_position_ned_cov_t local_position_ned_cov;
+	mavlink_msg_local_position_ned_cov_decode(msg, &local_position_ned_cov);
+
+	radar_detection_s radar_detection{};
+	radar_detection.timestamp = hrt_absolute_time();
+	radar_detection.track_id = local_position_ned_cov.estimator_type;
+
+	radar_detection.x = local_position_ned_cov.x;
+	radar_detection.y = local_position_ned_cov.y;
+	radar_detection.z = local_position_ned_cov.z;
+
+	radar_detection.vx = local_position_ned_cov.vx;
+	radar_detection.vy = local_position_ned_cov.vy;
+	radar_detection.vz = local_position_ned_cov.vz;
+
+	radar_detection.pos_cov_x = local_position_ned_cov.covariance[0];
+	radar_detection.pos_cov_y = local_position_ned_cov.covariance[1];
+	radar_detection.pos_cov_z = local_position_ned_cov.covariance[2];
+
+	radar_detection.vel_cov_x = local_position_ned_cov.covariance[3];
+	radar_detection.vel_cov_y = local_position_ned_cov.covariance[4];
+	radar_detection.vel_cov_z = local_position_ned_cov.covariance[5];
+
+	PX4_INFO("received radar message");
+
+	_radar_detection_pub.publish(radar_detection);
+}
 
 void
 MavlinkReceiver::run()
