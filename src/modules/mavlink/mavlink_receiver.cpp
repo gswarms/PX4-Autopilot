@@ -274,6 +274,10 @@ MavlinkReceiver::handle_message(mavlink_message_t *msg)
 		handle_message_statustext(msg);
 		break;
 
+	case MAVLINK_MSG_ID_LOCAL_POSITION_NED_COV:
+		handle_message_local_position_ned_cov(msg);
+		break;
+
 #if !defined(CONSTRAINED_FLASH)
 
 	case MAVLINK_MSG_ID_NAMED_VALUE_FLOAT:
@@ -3061,6 +3065,9 @@ MavlinkReceiver::handle_message_gimbal_device_attitude_status(mavlink_message_t 
 void
 MavlinkReceiver::handle_message_local_position_ned_cov(mavlink_message_t *msg)
 {
+
+	PX4_INFO("received radar message");
+	
 	mavlink_local_position_ned_cov_t local_position_ned_cov;
 	mavlink_msg_local_position_ned_cov_decode(msg, &local_position_ned_cov);
 
@@ -3083,8 +3090,6 @@ MavlinkReceiver::handle_message_local_position_ned_cov(mavlink_message_t *msg)
 	radar_detection.vel_cov_x = local_position_ned_cov.covariance[3];
 	radar_detection.vel_cov_y = local_position_ned_cov.covariance[4];
 	radar_detection.vel_cov_z = local_position_ned_cov.covariance[5];
-
-	PX4_INFO("received radar message");
 
 	_radar_detection_pub.publish(radar_detection);
 }
