@@ -224,6 +224,7 @@ set(msg_files
 
 	# user messages
 	OsdOverlay.msg
+	RadarDetection.msg
 )
 list(SORT msg_files)
 
