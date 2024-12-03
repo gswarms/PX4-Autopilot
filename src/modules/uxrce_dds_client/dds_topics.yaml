@@ -23,6 +23,9 @@ publications:
   - topic: /fmu/out/esc_status
     type: px4_msgs::msg::EscStatus
 
+  - topic: /fmu/out/radar_detection
+    type: px4_msgs::msg::RadarDetection
+
 # Create uORB::Publication
 subscriptions:
   - topic: /fmu/in/offboard_control_mode
