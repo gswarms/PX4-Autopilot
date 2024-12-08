@@ -135,9 +135,9 @@ if [[ $INSTALL_NUTTX == "true" ]]; then
 		libisl-dev \
 		libmpc-dev \
 		libmpfr-dev \
-		libncurses5 \
-		libncurses5-dev \
-		libncursesw5-dev \
+		libncurses6 \
+		libncurses-dev \
+		libncursesw6 \
 		libtool \
 		pkg-config \
 		screen \
