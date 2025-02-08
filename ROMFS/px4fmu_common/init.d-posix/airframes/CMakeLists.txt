@@ -81,6 +81,7 @@ px4_add_romfs_files(
 	4011_gz_x500_stereo_cam
 	4012_gz_sh_136
 	4013_gz_gs001
+	4014_gz_pz001
 	
 	6011_gazebo-classic_typhoon_h480
 	6011_gazebo-classic_typhoon_h480.post
