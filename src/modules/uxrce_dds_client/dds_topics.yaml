@@ -7,15 +7,18 @@ publications:
 
   - topic: /fmu/out/vehicle_attitude
     type: px4_msgs::msg::VehicleAttitude
+    rate: 50.0
 
   - topic: /fmu/out/vehicle_angular_velocity
     type: px4_msgs::msg::VehicleAngularVelocity
+    rate: 50.0
     
   - topic: /fmu/out/vehicle_control_mode
     type: px4_msgs::msg::VehicleControlMode
 
   - topic: /fmu/out/vehicle_local_position
     type: px4_msgs::msg::VehicleLocalPosition
+    rate: 50.0
 
   - topic: /fmu/out/vehicle_status
     type: px4_msgs::msg::VehicleStatus
@@ -28,6 +31,7 @@ publications:
 
   - topic: /fmu/out/esc_status
     type: px4_msgs::msg::EscStatus
+    rate: 5.0
 
   - topic: /fmu/out/radar_detection
     type: px4_msgs::msg::RadarDetection
