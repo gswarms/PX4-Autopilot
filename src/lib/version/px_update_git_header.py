@@ -147,20 +147,32 @@ if (os.path.exists('src/modules/mavlink/mavlink/.git')):
 
 
 # NuttX
-if (os.path.exists('platforms/nuttx/NuttX/nuttx/.git')):
-    nuttx_git_tags = subprocess.check_output('git -c versionsort.suffix=- tag --sort=v:refname'.split(),
-                                  cwd='platforms/nuttx/NuttX/nuttx', stderr=subprocess.STDOUT).decode('utf-8').strip()
-    nuttx_git_tag = re.findall(r'nuttx-[0-9]+\.[0-9]+\.[0-9]+', nuttx_git_tags)[-1].replace("nuttx-", "v")
-    nuttx_git_tag = re.sub('-.*', '.0', nuttx_git_tag)
-    nuttx_git_version = subprocess.check_output('git rev-parse --verify HEAD'.split(),
+if os.path.exists('platforms/nuttx/NuttX/nuttx/.git'):
+    try:
+        nuttx_git_tags = subprocess.check_output('git -c versionsort.suffix=- tag --sort=v:refname'.split(),
                                       cwd='platforms/nuttx/NuttX/nuttx', stderr=subprocess.STDOUT).decode('utf-8').strip()
-    nuttx_git_version_short = nuttx_git_version[0:16]
+        nuttx_version_match = re.findall(r'nuttx-[0-9]+\.[0-9]+\.[0-9]+', nuttx_git_tags)
 
-    header += f"""
-#define NUTTX_GIT_VERSION_STR  "{nuttx_git_version}"
-#define NUTTX_GIT_VERSION_BINARY 0x{nuttx_git_version_short}
-#define NUTTX_GIT_TAG_STR  "{nuttx_git_tag}"
-"""
+        if nuttx_version_match:
+            nuttx_git_tag = nuttx_version_match[-1].replace("nuttx-", "v")
+        else:
+            print("Warning: No NuttX Git tag found, using default version v10.0.0")
+            nuttx_git_tag = "v10.0.0"
+
+        nuttx_git_tag = re.sub('-.*', '.0', nuttx_git_tag)
+        nuttx_git_version = subprocess.check_output('git rev-parse --verify HEAD'.split(),
+                                      cwd='platforms/nuttx/NuttX/nuttx', stderr=subprocess.STDOUT).decode('utf-8').strip()
+        nuttx_git_version_short = nuttx_git_version[0:16]
+
+        header += f"""
+    #define NUTTX_GIT_VERSION_STR  "{nuttx_git_version}"
+    #define NUTTX_GIT_VERSION_BINARY 0x{nuttx_git_version_short}
+    #define NUTTX_GIT_TAG_STR  "{nuttx_git_tag}"
+    """
+    except subprocess.CalledProcessError:
+        print("Warning: Skipping NuttX version extraction due to missing submodule.")
+else:
+    print("Warning: NuttX is not included in the build (skipping version extraction).")
 
 
 if old_header != header:
