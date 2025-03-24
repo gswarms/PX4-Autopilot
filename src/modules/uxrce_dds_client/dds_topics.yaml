@@ -37,6 +37,9 @@ publications:
   - topic: /fmu/out/radar_detection
     type: px4_msgs::msg::RadarDetection
 
+  - topic: /fmu/out/timesync_status
+    type: px4_msgs::msg::TimesyncStatus
+
 # Create uORB::Publication
 subscriptions:
   - topic: /fmu/in/offboard_control_mode
