@@ -3069,6 +3069,7 @@ MavlinkReceiver::handle_message_local_position_ned_cov(mavlink_message_t *msg)
 	mavlink_msg_local_position_ned_cov_decode(msg, &local_position_ned_cov);
 
 	radar_detection_s radar_detection{};
+
 	radar_detection.timestamp = hrt_absolute_time();
 	radar_detection.track_id = local_position_ned_cov.estimator_type;
 
@@ -3080,7 +3081,8 @@ MavlinkReceiver::handle_message_local_position_ned_cov(mavlink_message_t *msg)
 	radar_detection.vy = local_position_ned_cov.vy;
 	radar_detection.vz = local_position_ned_cov.vz;
 
-	radar_detection.pos_cov_x = local_position_ned_cov.covariance[0];
+	radar_detection.pos_cov_x = hrt_absolute_time() - local_position_ned_cov.time_usec * 1000;
+
 	radar_detection.pos_cov_y = local_position_ned_cov.covariance[1];
 	radar_detection.pos_cov_z = local_position_ned_cov.covariance[2];
 
