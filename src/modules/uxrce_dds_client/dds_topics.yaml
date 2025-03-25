@@ -32,13 +32,14 @@ publications:
 
   - topic: /fmu/out/esc_status
     type: px4_msgs::msg::EscStatus
-    rate: 100.0
+    rate: 10.0
 
   - topic: /fmu/out/radar_detection
     type: px4_msgs::msg::RadarDetection
 
   - topic: /fmu/out/timesync_status
     type: px4_msgs::msg::TimesyncStatus
+    rate: 10.0
 
 # Create uORB::Publication
 subscriptions:
