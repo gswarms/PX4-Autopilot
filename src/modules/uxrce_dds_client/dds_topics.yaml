@@ -37,6 +37,10 @@ publications:
   - topic: /fmu/out/radar_detection
     type: px4_msgs::msg::RadarDetection
 
+  - topic: /fmu/out/rc_channels
+    type: px4_msgs::msg::RcChannels
+    rate: 10.0
+
   - topic: /fmu/out/timesync_status
     type: px4_msgs::msg::TimesyncStatus
     rate: 10.0
