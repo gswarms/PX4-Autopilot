@@ -120,6 +120,7 @@
 #include "streams/VFR_HUD.hpp"
 #include "streams/VIBRATION.hpp"
 #include "streams/WIND_COV.hpp"
+#include "streams/INTERCEPTION_DATA.hpp"
 
 #if !defined(CONSTRAINED_FLASH)
 # include "streams/ADSB_VEHICLE.hpp"
@@ -483,6 +484,9 @@ static const StreamListItem streams_list[] = {
 #if defined(UAVIONIX_ADSB_OUT_DYNAMIC_HPP)
 	create_stream_list_item<MavlinkStreamUavionixADSBOutDynamic>()
 #endif // UAVIONIX_ADSB_OUT_DYNAMIC_HPP
+#if defined(INTERCEPTION_DATA_HPP)
+	create_stream_list_item<MavlinkStreamInterceptionData>()
+#endif // INTERCEPTION_DATA_HPP
 };
 
 const char *get_stream_name(const uint16_t msg_id)
