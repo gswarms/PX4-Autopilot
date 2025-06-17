@@ -65,5 +65,7 @@ subscriptions:
   - topic: /fmu/in/osd_overlay
     type: px4_msgs::msg::OsdOverlay
 
+  - topic: /fmu/in/interception_data
+    type: px4_msgs::msg::InterceptionData
 # Create uORB::PublicationMulti
 subscriptions_multi:
