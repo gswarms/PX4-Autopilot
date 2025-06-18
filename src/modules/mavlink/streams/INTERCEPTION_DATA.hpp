@@ -55,6 +55,14 @@ protected:
         if (_sub.update(&data)) {
             mavlink_interception_data_t msg{};
 
+            PX4_DEBUG("Sending INTERCEPTION_DATA: id=%d tgo=%.2f md=%.2f pos=[%.2f %.2f %.2f]",
+                data.id,
+                static_cast<double>(data.tgo),
+                static_cast<double>(data.miss_distance),
+                static_cast<double>(data.estimated_relative_position[0]),
+                static_cast<double>(data.estimated_relative_position[1]),
+                static_cast<double>(data.estimated_relative_position[2]));
+
             msg.timestamp = data.timestamp;
             msg.id = data.id;
             msg.tgo = data.tgo;
