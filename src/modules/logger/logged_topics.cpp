@@ -122,6 +122,8 @@ void LoggedTopics::add_default_topics()
 	add_topic("vehicle_gps_position", 500);
 	add_topic("vehicle_land_detected");
 	add_topic("vehicle_local_position", 100);
+	add_topic("radar_detection", 200);
+	add_topic("interception_data", 200);
 	add_topic("vehicle_local_position_setpoint", 100);
 	add_topic("vehicle_magnetometer", 200);
 	add_topic("vehicle_rates_setpoint", 20);
