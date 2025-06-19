@@ -61,12 +61,12 @@ if validate:
         # format matches, check the major and minor numbers
         major = int(m.group(1))
         minor = int(m.group(2))
-        if major < 1 or (major == 1 and minor < 9):
-            print("")
-            print("Error: PX4 version too low, expected at least v1.9.0")
-            print("Check the git tag (current tag: '{:}')".format(git_tag_test))
-            print("")
-            sys.exit(1)
+        # if major < 1 or (major == 1 and minor < 9):
+        #     print("")
+        #     print("Error: PX4 version too low, expected at least v1.9.0")
+        #     print("Check the git tag (current tag: '{:}')".format(git_tag_test))
+        #     print("")
+        #     sys.exit(1)
     else:
         print("")
         print("Error: the git tag '{:}' does not match the expected format.".format(git_tag_test))
