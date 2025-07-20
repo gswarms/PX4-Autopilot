@@ -3,6 +3,8 @@ uint64 timestamp		# time since system start (microseconds)
 
 uint8 track_id # Unique track ID - 1 for target, 2 for interceptor
 
+float32 time_delay_ms # time delay of the message from detection to flight controller
+
 # position
 float32 x # x position in meters - North
 float32 y # y position in meters - East
