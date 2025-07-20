@@ -3081,15 +3081,15 @@ MavlinkReceiver::handle_message_local_position_ned_cov(mavlink_message_t *msg)
 	radar_detection.vy = local_position_ned_cov.vy;
 	radar_detection.vz = local_position_ned_cov.vz;
 
-	radar_detection.time_delay_us = hrt_absolute_time() - local_position_ned_cov.time_usec * 1000;
+	radar_detection.time_delay_us = hrt_absolute_time() - local_position_ned_cov.time_usec;
 
 	radar_detection.pos_cov_x = local_position_ned_cov.covariance[0];
-	radar_detection.pos_cov_y = local_position_ned_cov.covariance[1];
-	radar_detection.pos_cov_z = local_position_ned_cov.covariance[2];
+	radar_detection.pos_cov_y = local_position_ned_cov.covariance[4];
+	radar_detection.pos_cov_z = local_position_ned_cov.covariance[8];
 
-	radar_detection.vel_cov_x = local_position_ned_cov.covariance[3];
-	radar_detection.vel_cov_y = local_position_ned_cov.covariance[4];
-	radar_detection.vel_cov_z = local_position_ned_cov.covariance[5];
+	radar_detection.vel_cov_x = local_position_ned_cov.covariance[9];
+	radar_detection.vel_cov_y = local_position_ned_cov.covariance[13];
+	radar_detection.vel_cov_z = local_position_ned_cov.covariance[17];
 
 	_radar_detection_pub.publish(radar_detection);
 }
