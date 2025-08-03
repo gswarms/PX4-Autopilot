@@ -73,6 +73,13 @@ protected:
             msg.estimated_relative_position[0] = data.estimated_relative_position[0];
             msg.estimated_relative_position[1] = data.estimated_relative_position[1];
             msg.estimated_relative_position[2] = data.estimated_relative_position[2];
+            msg.interceptor_active = data.interceptor_active;
+            msg.target_estimation_active = data.target_estimation_active;
+            msg.camera_driver_active = data.camera_driver_active;
+            msg.monitor_active = data.monitor_active;
+            msg.recorder_active = data.recorder_active;
+            msg.detector_active = data.detector_active;
+            msg.osd_active = data.osd_active;
 
             mavlink_msg_interception_data_send_struct(_mavlink->get_channel(), &msg);
             return true;
