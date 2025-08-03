@@ -70,6 +70,7 @@ protected:
             msg.position_std_norm = data.position_std_norm;
             msg.substate = data.substate;
             msg.target_detected = data.target_detected;
+            msg.target_time_delay = data.target_time_delay;
             msg.estimated_relative_position[0] = data.estimated_relative_position[0];
             msg.estimated_relative_position[1] = data.estimated_relative_position[1];
             msg.estimated_relative_position[2] = data.estimated_relative_position[2];
