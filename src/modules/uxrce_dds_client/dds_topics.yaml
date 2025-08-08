@@ -41,6 +41,10 @@ publications:
     type: px4_msgs::msg::RcChannels
     rate: 10.0
 
+  - topic: /fmu/out/hover_thrust_estimate
+    type: px4_msgs::msg::HoverThrustEstimate
+    rate: 2.0
+
   - topic: /fmu/out/timesync_status
     type: px4_msgs::msg::TimesyncStatus
     rate: 10.0
