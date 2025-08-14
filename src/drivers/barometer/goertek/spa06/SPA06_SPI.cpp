@@ -1,6 +1,6 @@
 /****************************************************************************
  *
- *   Copyright (c) 2022 PX4 Development Team. All rights reserved.
+ *   Copyright (c) 2024 PX4 Development Team. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -32,12 +32,12 @@
  ****************************************************************************/
 
 /**
- * @file SPL06_SPI.cpp
+ * @file SPA06_SPI.cpp
  *
- * SPI interface for Goertek SPL06
+ * SPI interface for Goertek SPA06
  */
 
-#include "spl06.h"
+#include "spa06.h"
 
 #include <px4_platform_common/px4_config.h>
 #include <drivers/device/spi.h>
@@ -48,11 +48,11 @@
 #define DIR_READ			(1<<7)  //for set
 #define DIR_WRITE			~(1<<7) //for clear
 
-class SPL06_SPI: public device::SPI, public spl06::ISPL06
+class SPA06_SPI: public device::SPI, public spa06::ISPA06
 {
 public:
-	SPL06_SPI(uint8_t bus, uint32_t device, int bus_frequency, spi_mode_e spi_mode);
-	virtual ~SPL06_SPI() override = default;
+	SPA06_SPI(uint8_t bus, uint32_t device, int bus_frequency, spi_mode_e spi_mode);
+	virtual ~SPA06_SPI() override = default;
 
 	int init() override { return SPI::init(); }
 
@@ -66,19 +66,19 @@ public:
 	uint8_t get_device_address() const override { return device::SPI::get_device_address(); }
 };
 
-spl06::ISPL06 *
-spl06_spi_interface(uint8_t busnum, uint32_t device, int bus_frequency, spi_mode_e spi_mode)
+spa06::ISPA06 *
+spa06_spi_interface(uint8_t busnum, uint32_t device, int bus_frequency, spi_mode_e spi_mode)
 {
-	return new SPL06_SPI(busnum, device, bus_frequency, spi_mode);
+	return new SPA06_SPI(busnum, device, bus_frequency, spi_mode);
 }
 
-SPL06_SPI::SPL06_SPI(uint8_t bus, uint32_t device, int bus_frequency, spi_mode_e spi_mode) :
-	SPI(DRV_BARO_DEVTYPE_SPL06, MODULE_NAME, bus, device, spi_mode, bus_frequency)
+SPA06_SPI::SPA06_SPI(uint8_t bus, uint32_t device, int bus_frequency, spi_mode_e spi_mode) :
+	SPI(DRV_BARO_DEVTYPE_SPA06, MODULE_NAME, bus, device, spi_mode, bus_frequency)
 {
 }
 
 uint8_t
-SPL06_SPI::get_reg(uint8_t addr)
+SPA06_SPI::get_reg(uint8_t addr)
 {
 	uint8_t cmd[2] = { (uint8_t)(addr | DIR_READ), 0}; // set MSB bit
 	transfer(&cmd[0], &cmd[0], 2);
@@ -87,14 +87,14 @@ SPL06_SPI::get_reg(uint8_t addr)
 }
 
 int
-SPL06_SPI::set_reg(uint8_t value, uint8_t addr)
+SPA06_SPI::set_reg(uint8_t value, uint8_t addr)
 {
 	uint8_t cmd[2] = { (uint8_t)(addr & DIR_WRITE), value}; // clear MSB bit
 	return transfer(&cmd[0], nullptr, 2);
 }
 
 int
-SPL06_SPI::read(uint8_t addr, uint8_t *buf, uint8_t len)
+SPA06_SPI::read(uint8_t addr, uint8_t *buf, uint8_t len)
 {
 	uint8_t tx_buf[len + 1] = {(uint8_t)(addr | DIR_READ)}; // GCC support VLA, let's use it
 
